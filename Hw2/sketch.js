@@ -1,7 +1,56 @@
+//Ananya Francois-Martin. I want to make a drawing that has a road and a car and a sun. I wish to have trees but that ,may be too hard. Ill see what prof says.
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(800, 600);
 }
 
 function draw() {
-  background(220);
+  background(102,0,102);
+ 
+  if (mouseIsPressed)
+    {
+      background (0, 255, 255);
+    }
+
+     
+ 
+  // road
+  let c2 = color(64, 64, 64);
+    fill(c2)
+  rect(0, 500, 800, 800);
+ 
+  //road paint(s)
+  let c1 = color(255, 204, 0);
+      fill (c1)
+  rect(15, 535, 105, 40)
+  rect(145, 535, 130, 40)
+  rect(300, 535, 150, 40)
+  rect(480, 535, 175, 40)
+  rect(680, 535, 190, 40)
+ 
+  //moon
+   let c3 = color(178, 178, 176);
+  if (mouseIsPressed === true) {
+      fill(255, 210, 24);
+    } else {
+      fill(c3);
+    }
+  circle(65, 65, 100);
+ 
+  //car
+  let c6 = color(245, 29, 29)
+    fill(c6)
+  rect(450, 405, 165, 108);
+ 
+  //window
+  let c4 = color(90, 231, 253);
+    fill(c4)
+  rect(470, 415, 55, 55);
+  rect(545, 415, 55, 55);
+ 
+  //tire
+  let c5 = color(128, 128, 128);
+    fill(c5)
+  circle(480, 505, 55);
+  circle(585, 505, 55);
+  
 }
