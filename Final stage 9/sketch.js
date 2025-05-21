@@ -1,4 +1,3 @@
-//Ananya Francois. Final. edition .9. Follow your eyes and the scenes as you drive through a small state. Enjoy habitats and change them to find the next level.
 let state = "menu";
 let button5;
  let scene = 1;
@@ -9,7 +8,7 @@ let button5;
  //lerp is the feature that helps the background fade between two colors rather than randomly
  let lerpAmount = 0;
  let increasing = true;
-let currentScene = "north"; // Track the current scene
+let newScene = "north"; 
  
  function setup() {
    createCanvas(800, 600);
@@ -93,11 +92,14 @@ let currentScene = "north"; // Track the current scene
      northScene();
    } else if (state === "southScene") {
      southScene();
-   }
-   else if (state === "north") {
-    northScene();
+   } else if (state === "lake") {
+    lakeScene();
   } else if (state === "beach") {
     beachScene();
+  }else if (state === "openfield") {
+    fieldScene();
+  } else if (state === "swamp") {
+    swampScene();
   }
  }
  //menu screen features
@@ -249,7 +251,7 @@ let currentScene = "north"; // Track the current scene
   fill(0);  
   textSize(16);
   textAlign(CENTER, CENTER);
-  text("Shopping", 50, 420, 150, 40, 20);  
+  text("Shopping", 50, 420, 150, 40,);  
   
   // Draw the Beach rectangle 
   fill(243, 228, 22);
@@ -281,14 +283,14 @@ let currentScene = "north"; // Track the current scene
   fill(0);  
   textSize(16);
   textAlign(CENTER, CENTER);
-  text("Swamp", 30, 300, 150, 40, 20);  
+  text("Swamp", 30, 300, 150, 40);  
   
   // Draw the Lake rectangle 
   fill(243, 228, 22);
   rect(250, 300, 150, 40, 20);
   
   fill(0);  
-  text("Lake", 30, 300, 150, 80);  
+  text("Lake", 250, 300, 150, 40);  
   
   // Draw the openfield rectangle 
   fill(243, 228, 22);
@@ -496,6 +498,199 @@ function beachScene() {
   circle(480, 505, 55);
   circle(585, 505, 55);
 }
+
+function openfield () {background(51,153,255);
+   
+   //field
+  
+    // Title: "Find Button to Continue" 
+  fill(255,0, 1);
+  textSize(32);
+  textAlign(CENTER, TOP);
+  textStyle(BOLDITALIC);
+  text("So Peaceful", width / 2 - 1, 25);
+   
+  
+   fill(17,158,26)
+   rect(0, 380, 800, 225) // field
+   
+   noStroke (0)
+   fill(107, 69, 31);
+   rect(0, 500, 800, 800);
+ 
+   //sun
+   fill(255,255, 10);
+   circle(65, 65, 100);
+ 
+   //car
+   fill(245, 29, 29);
+   rect(450, 405, 165, 108);
+ 
+   fill(90, 231, 253);
+   rect(470, 415, 55, 55);
+   rect(545, 415, 55, 55);
+ 
+   fill(128, 128, 128);
+   circle(480, 505, 55);
+   circle(585, 505, 55);
+   
+   //flowers
+     // Petals
+  fill(249,114,138);
+  noStroke();
+  circle(300 + 20, 450, 16);
+  circle(300 - 20, 450, 16);
+  circle(300, 450 + 20, 16);
+  circle(300, 450 - 20, 16);
+  circle(300 + 14, 450 + 14, 16);
+  circle(300 - 14, 450 + 14, 16);
+  circle(300 + 14, 450 - 14, 16);
+  circle(300 - 14, 450 - 14, 16);
+
+  // Center
+  fill('yellow');
+  circle(300, 450, 25);
+   
+   //repeat bout 5 times
+   // Petals
+  fill(255,102,178);
+  noStroke();
+  circle(125 + 20, 450, 16);
+  circle(125 - 20, 450, 16);
+  circle(125, 450 + 20, 16);
+  circle(125, 450 - 20, 16);
+  circle(125 + 14, 450 + 14, 16);
+  circle(125 - 14, 450 + 14, 16);
+  circle(125 + 14, 450 - 14, 16);
+  circle(125 - 14, 450 - 14, 16);
+
+  // Center
+  fill('yellow');
+  circle(125, 450, 25);
+   
+    // Petals
+  fill(255,0,255);
+  noStroke();
+  circle(700 + 20, 450, 16);
+  circle(700 - 20, 450, 16);
+  circle(700, 450 + 20, 16);
+  circle(700, 450 - 20, 16);
+  circle(700 + 14, 450 + 14, 16);
+  circle(700 - 14, 450 + 14, 16);
+  circle(700 + 14, 450 - 14, 16);
+  circle(700 - 14, 450 - 14, 16);
+
+  // Center
+  fill('yellow');
+  circle(700, 450, 25);
+ }
+
+function lakeScene () { background(155,255,255);
+   
+   //lake
+  
+    // Title: "Find Button to Continue" 
+  fill(102,0, 102);
+  textSize(32);
+  textAlign(CENTER, TOP);
+  textStyle(BOLDITALIC);
+  text("Its Lake Michigan", width / 2 - 1, 25);
+   
+  //sand and water
+   fill(0,0,255)
+   rect(0, 380, 800, 225) // water
+   
+   fill (0)
+   rect(5, 450, 35, 60)
+   rect(125, 450, 35, 60)
+   rect(175, 450, 35, 60)
+   rect(225, 450, 35, 60)
+   rect(75, 450, 35, 60)
+   rect(275, 450, 35, 60)
+   rect(325, 450, 35, 60)
+   rect(375, 450, 35, 60)
+   rect(425, 450, 35, 60)
+   rect(475, 450, 35, 60) 
+   rect(525, 450, 35, 60)
+   rect(575, 450, 35, 60)
+   rect(625, 450, 35, 60)
+   rect(675, 450, 35, 60)
+   rect(725, 450, 35, 60)
+   rect(775, 450, 35, 60)
+   rect(825, 450, 35, 60)
+   rect(875, 450, 35, 60)
+   rect(0, 420, 800, 30) //bar
+ 
+   
+   fill(64, 64, 64);
+   rect(0, 500, 800, 800);
+ 
+   fill(255, 204, 0);
+   rect(15, 535, 105, 40);
+   rect(145, 535, 130, 40);
+   rect(300, 535, 150, 40);
+   rect(480, 535, 175, 40);
+   rect(680, 535, 190, 40);
+ 
+   //car
+   fill(255,255, 102);
+   circle(65, 65, 100);
+ 
+   fill(245, 29, 29);
+   rect(450, 405, 165, 108);
+ 
+   fill(90, 231, 253);
+   rect(470, 415, 55, 55);
+   rect(545, 415, 55, 55);
+ 
+   fill(128, 128, 128);
+   circle(480, 505, 55);
+   circle(585, 505, 55);
+  
+}
+function swampScene (){   
+  background(255,153,51);
+  
+  fill(255,255, 1);
+  textSize(32);
+  textAlign(CENTER, TOP);
+  textStyle(BOLDITALIC);
+  text("ew Dirty Water!!", width / 2 - 1, 25);
+   
+  //sand and water
+   fill(0,154,153)
+   rect(0, 380, 800, 225) // swamp water
+   fill(51,102,0)
+   ellipse(0, 500, 800, 65) //algi
+ 
+   
+   fill(64, 64, 64);
+   rect(0, 500, 800, 800);
+ 
+   fill(255, 204, 0);
+   rect(15, 535, 105, 40);
+   rect(145, 535, 130, 40);
+   rect(300, 535, 150, 40);
+   rect(480, 535, 175, 40);
+   rect(680, 535, 190, 40);
+ 
+   //sun
+   fill(255,255, 153);
+   circle(65, 65, 100);
+ 
+   //car
+   fill(245, 29, 29);
+   rect(450, 405, 165, 108);
+ 
+   fill(90, 231, 253);
+   rect(470, 415, 55, 55);
+   rect(545, 415, 55, 55);
+ 
+   fill(128, 128, 128);
+   circle(480, 505, 55);
+   circle(585, 505, 55);
+ }
+
  
  function exitScreen() {
    background(0);
@@ -534,13 +729,13 @@ function beachScene() {
        state = "help";
      } else if (mouseX > 320 && mouseX < 570 && mouseY > 480 && mouseY < 530) {
        state = "exit";
-     } else if (currentScene === "north") {
+     } else if (state === "north") {
     if (mouseX > 300 && mouseX < 450 && mouseY > 420 && mouseY < 460) {
-      currentScene = "beach";
+      state = "beach";
 }
 }
      }
-   }
  }
  
- //Notes: This was a very big pain in my ass. I hope it was enough for you guys expections. All of the scenes should be in there they just wont collide with existing code. It was easier to start with scraps and build rather than remove and edit. SO many bugs arised and it was harder to enjoy after adding more code. 
+ //Notes: This was a very big pain in my ass. I hope it was enough for you guys expections.
+ 
