@@ -543,4 +543,4 @@ function beachScene() {
    }
  }
  
- //Notes: This was a very big pain in my ass. I hope it was enough for you guys expections.
+ //Notes: This was a very big pain in my ass. I hope it was enough for you guys expections. All of the scenes should be in there they just wont collide with existing code. It was easier to start with scraps and build rather than remove and edit. SO many bugs arised and it was harder to enjoy after adding more code. 
