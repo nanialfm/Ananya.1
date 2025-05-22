@@ -1,0 +1,702 @@
+let state = "menu";
+let button5;
+let scene = 1;
+//scene 3 a & b buttons
+let button, northButton, southButton;
+//the two colors
+let startColor, endColor;
+//lerp is the feature that helps the background fade between two colors rather than randomly
+let lerpAmount = 0;
+let increasing = true;
+
+function setup() {
+    createCanvas(800, 600);
+
+    button5 = createButton('Back to Menu');
+    button5.position(10, height - 40); // Position the button in the bottom left corner
+    button5.style('background-color', 'rgb(191,8,8)');
+    button5.style('color', 'white');
+    button5.style('border', 'none');
+    button5.style('padding', '10px');
+    button5.style('border-radius', '5px');
+    button5.mousePressed(() => {
+        // Switch back to the menu screen when clicked
+        state = "menu";
+        button.hide();
+        northButton.hide();
+        southButton.hide();
+    });
+
+    textFont('Century Schoolbook');
+
+    // Define colors for background fade
+    startColor = color(102, 0, 102);
+    endColor = color(0, 255, 255);
+
+    // Create the button for scene transition in game screen
+    button = createButton('Continue');
+    button.position(725, 450);
+    button.mousePressed(() => {
+        // Change to second scene when clicked
+        scene = 2;
+        // Hiding the button when in Scene 2
+        button.hide();
+    });
+    button.hide();
+
+    // Create North and South buttons for Scene 2
+    northButton = createButton('North');
+    northButton.position(675, 130);
+    northButton.mousePressed(() => {
+        // Change to north scene when clicked
+        state = "northScene";
+        northButton.hide();
+        southButton.hide();
+    });
+    northButton.hide();
+
+    southButton = createButton('South');
+    southButton.position(675, 425);
+    southButton.mousePressed(() => {
+        // Change to south scene when clicked
+        state = "southScene";
+        northButton.hide();
+        southButton.hide();
+    });
+    southButton.hide();
+}
+
+// Call the relevant scene functions in draw method
+function draw() {
+          if (state === "menu") {
+        menuScreen();
+    } else if (state === "game") {
+        gameScreen();
+    } else if (state === "characters") {
+        charactersScreen();
+    } else if (state === "settings") {
+        settingsScreen();
+    } else if (state === "help") {
+        helpScreen();
+    } else if (state === "exit") {
+        exitScreen();
+    } else if (state === "northScene") {
+        northScene();
+    } else if (state === "southScene") {
+        southScene();
+    } else if (state === "lake") {
+        lakeScene();
+    } else if (state === "beach") {
+        beachScene();
+    } else if (state === "openfield") {
+        openField();
+    } else if (state === "swamp") {
+        swampScene();
+    }
+}
+
+function menuScreen() {
+    background(70, 39, 60);
+
+    fill(210, 88, 55);
+    rect(25, 325, 550, 50, 20); // Start button
+    fill(120, 115, 45);
+    rect(25, 400, 250, 50, 20); // Characters button
+    fill(40, 120, 180);
+    rect(320, 400, 250, 50, 20); // Settings button
+    fill(240, 170, 70);
+    rect(25, 480, 250, 50, 20); // Help button
+    fill(250, 195, 170);
+    rect(320, 480, 250, 50, 20); // Exit button
+
+    fill(0);
+    textSize(20);
+    textAlign(CENTER, CENTER);
+    text("Start", 300, 350);
+    text("Characters", 150, 425);
+    text("Settings", 445, 425);
+    text("Help", 150, 505);
+    text("Exit", 445, 505);
+
+    //title
+    fill(14, 204, 237);
+    textSize(60);
+    textAlign(CENTER, TOP);
+    text('Whats Going On?', 300, 65);
+
+    //description
+    textSize(18);
+    text('a short game', 300, 155);
+
+    //creators name, aka me
+    textSize(13);
+    text('By : Ananya Francois', 300, 195);
+
+    //mouse location, for some reason it wont stay tho...
+    textSize(16);
+    text(`x: ${mouseX} y: ${mouseY}`, 30, 25);
+}
+
+function gameScreen() {
+    if (scene === 1) {
+        sceneOne();
+        button.show();
+    } else if (scene === 2) {
+        sceneTwo();
+        northButton.show();
+        southButton.show();
+    }
+}
+
+function sceneOne() {
+      // Background fade logic for Scene 1
+   let bgColor = lerpColor(startColor, endColor, lerpAmount);
+   background(bgColor);
+  
+    // Title: "Find Button to Continue" 
+  fill(255, 255, 0);
+  textSize(32);
+  textAlign(CENTER, TOP);
+  textStyle(BOLDITALIC);
+  text("Find Button to Continue!", width / 2 - 20, 20);
+   
+   // The scene 1 elements
+   fill(64, 64, 64);
+   rect(0, 500, 800, 800);
+ 
+   fill(255, 204, 0);
+   rect(15, 535, 105, 40);
+   rect(145, 535, 130, 40);
+   rect(300, 535, 150, 40);
+   rect(480, 535, 175, 40);
+   rect(680, 535, 190, 40);
+ 
+   let moonColor = mouseIsPressed ? color(255, 210, 24) : color(178, 178, 176);
+   fill(moonColor);
+   circle(65, 65, 100);
+ 
+   fill(245, 29, 29);
+   rect(450, 405, 165, 108);
+ 
+   fill(90, 231, 253);
+   rect(470, 415, 55, 55);
+   rect(545, 415, 55, 55);
+ 
+   fill(128, 128, 128);
+   circle(480, 505, 55);
+   circle(585, 505, 55);
+
+}
+
+function sceneTwo() {
+      background(51, 40, 102);
+   strokeWeight(0);
+   //street ground
+   fill(112, 128, 144);
+   rect(350, 75, 450, 150, 10);
+   rect(350, 350, 450, 150, 10);
+   rect(200, 200, 300, 200, 10);
+   rect(0, 250, 300, 100);
+  
+   //street paint
+   fill(255, 204, 0);
+   rect(15, 290, 60, 20);
+   rect(100, 290, 60, 20);
+   rect(200, 290, 60, 20);
+   rect(300, 290, 60, 20);
+   rect(420, 200, 20, 60);
+   rect(420, 340, 20, 60);
+   rect(550, 140, 60, 20);
+   rect(550, 415, 60, 20);
+   rect(420, 290, 20, 20);
+   rect(450, 415, 60, 20);
+   rect(450, 140, 60, 20);
+
+}
+
+function northScene() {
+    background(0, 102, 102);
+    fill(29, 21, 37);
+    rect(0, 250, 125, 600);
+    rect(110, 200, 85, 600);
+    rect(190, 160, 85, 600);
+    rect(275, 85, 85, 600);
+    rect(360, 130, 85, 600);
+    rect(445, 290, 85, 600);
+    rect(515, 160, 125, 600);
+
+    // Button to transition to Beach scene
+    let beachButton = createButton('Go to Beach');
+    beachButton.position(315, 400);
+    beachButton.mousePressed(() => {
+        state = "beach";
+        beachButton.hide();
+    });
+    beachButton.show();
+
+    fill(255, 255, 0);
+    textSize(38);
+    textFont('Courier New');
+    text('YOU’VE MADE IT TO THE CITY!', 315, 325);
+}
+
+function southScene() {
+    background(153, 0, 0);
+    fill(255);
+    textSize(64);
+    textAlign(CENTER, TOP);
+    text("Where in the South", width / 2.5, 50);
+
+    // Button to go to the Swamp scene
+    let swampButton = createButton('Go to Swamp');
+    swampButton.position(30, 300);
+    swampButton.mousePressed(() => {
+        state = "swamp";
+        swampButton.hide();
+    });
+    swampButton.show();
+
+    // Button to go to the Lake scene
+    let lakeButton = createButton('Go to Lake');
+    lakeButton.position(250, 300);
+    lakeButton.mousePressed(() => {
+        state = "lake";
+        lakeButton.hide();
+    });
+    lakeButton.show();
+
+    // Button to go to the Open-Field scene
+    let openFieldButton = createButton('Go to Open-Field');
+    openFieldButton.position(450, 300);
+    openFieldButton.mousePressed(() => {
+        state = "openfield";
+        openFieldButton.hide();
+    });
+    openFieldButton.show();
+}
+
+function lakeScene() {
+  background(155, 255, 255)
+  fill(102,0, 102);
+  textSize(32);
+  textAlign(CENTER, TOP);
+  textStyle(BOLDITALIC);
+  text("Its Lake Michigan", width / 2 - 1, 25);
+   
+  //sand and water
+   fill(0,0,255)
+   rect(0, 380, 800, 225) // water
+   
+   fill (0)
+   rect(5, 450, 35, 60)
+   rect(125, 450, 35, 60)
+   rect(175, 450, 35, 60)
+   rect(225, 450, 35, 60)
+   rect(75, 450, 35, 60)
+   rect(275, 450, 35, 60)
+   rect(325, 450, 35, 60)
+   rect(375, 450, 35, 60)
+   rect(425, 450, 35, 60)
+   rect(475, 450, 35, 60) 
+   rect(525, 450, 35, 60)
+   rect(575, 450, 35, 60)
+   rect(625, 450, 35, 60)
+   rect(675, 450, 35, 60)
+   rect(725, 450, 35, 60)
+   rect(775, 450, 35, 60)
+   rect(825, 450, 35, 60)
+   rect(875, 450, 35, 60)
+   rect(0, 420, 800, 30) //bar
+ 
+   fill(64, 64, 64);
+   rect(0, 500, 800, 800);
+ 
+   fill(255, 204, 0);
+   rect(15, 535, 105, 40);
+   rect(145, 535, 130, 40);
+   rect(300, 535, 150, 40);
+   rect(480, 535, 175, 40);
+   rect(680, 535, 190, 40);
+ 
+   //car
+   fill(255,255, 102);
+   circle(65, 65, 100);
+ 
+   fill(245, 29, 29);
+   rect(450, 405, 165, 108);
+ 
+   fill(90, 231, 253);
+   rect(470, 415, 55, 55);
+   rect(545, 415, 55, 55);
+ 
+   fill(128, 128, 128);
+   circle(480, 505, 55);
+   circle(585, 505, 55);
+  
+  //hide buttons
+}
+
+function beachScene() {
+  background(155, 255, 255);
+
+  fill(0, 204, 102);
+  textSize(32);
+  textAlign(CENTER, TOP);
+  textStyle(BOLDITALIC);
+  text("The Water!!", width / 2 - 1, 25);
+
+  // Sand and water
+  fill(0, 0, 255);
+  rect(0, 380, 800, 225);
+  fill(255, 204, 153);
+  rect(0, 450, 800, 65);
+  
+  fill(64, 64, 64);
+  rect(0, 500, 800, 800);
+
+  fill(255, 204, 0);
+  rect(15, 535, 105, 40);
+  rect(145, 535, 130, 40);
+  rect(300, 535, 150, 40);
+  rect(480, 535, 175, 40);
+  rect(680, 535, 190, 40);
+
+  // Car
+  fill(255, 255, 102);
+  circle(65, 65, 100);
+
+  fill(245, 29, 29);
+  rect(450, 405, 165, 108);
+
+  fill(90, 231, 253);
+  rect(470, 415, 55, 55);
+  rect(545, 415, 55, 55);
+
+  fill(128, 128, 128);
+  circle(480, 505, 55);
+  circle(585, 505, 55);
+
+}
+
+function openField () {
+background(51,153,255);
+   
+   //field
+  fill(255,0, 1);
+  textSize(32);
+  textAlign(CENTER, TOP);
+  textStyle(BOLDITALIC);
+  text("So Peaceful", width / 2 - 1, 25);
+   
+  
+   fill(17,158,26)
+   rect(0, 380, 800, 225) // field
+   
+   noStroke (0)
+   fill(107, 69, 31);
+   rect(0, 500, 800, 800);
+ 
+   //sun
+   fill(255,255, 10);
+   circle(65, 65, 100);
+ 
+   //car
+   fill(245, 29, 29);
+   rect(450, 405, 165, 108);
+ 
+   fill(90, 231, 253);
+   rect(470, 415, 55, 55);
+   rect(545, 415, 55, 55);
+ 
+   fill(128, 128, 128);
+   circle(480, 505, 55);
+   circle(585, 505, 55);
+   
+   //flowers
+     // Petals
+  fill(249,114,138);
+  noStroke();
+  circle(300 + 20, 450, 16);
+  circle(300 - 20, 450, 16);
+  circle(300, 450 + 20, 16);
+  circle(300, 450 - 20, 16);
+  circle(300 + 14, 450 + 14, 16);
+  circle(300 - 14, 450 + 14, 16);
+  circle(300 + 14, 450 - 14, 16);
+  circle(300 - 14, 450 - 14, 16);
+
+  // Center
+  fill('yellow');
+  circle(300, 450, 25);
+   
+   //repeat bout 5 times
+   // Petals
+  fill(255,102,178);
+  noStroke();
+  circle(125 + 20, 450, 16);
+  circle(125 - 20, 450, 16);
+  circle(125, 450 + 20, 16);
+  circle(125, 450 - 20, 16);
+  circle(125 + 14, 450 + 14, 16);
+  circle(125 - 14, 450 + 14, 16);
+  circle(125 + 14, 450 - 14, 16);
+  circle(125 - 14, 450 - 14, 16);
+
+  // Center
+  fill('yellow');
+  circle(125, 450, 25);
+   
+    // Petals
+  fill(255,0,255);
+  noStroke();
+  circle(700 + 20, 450, 16);
+  circle(700 - 20, 450, 16);
+  circle(700, 450 + 20, 16);
+  circle(700, 450 - 20, 16);
+  circle(700 + 14, 450 + 14, 16);
+  circle(700 - 14, 450 + 14, 16);
+  circle(700 + 14, 450 - 14, 16);
+  circle(700 - 14, 450 - 14, 16);
+
+  // Center
+  fill('yellow');
+  circle(700, 450, 25);
+}
+
+function swampScene() {
+      background(255,153,51);
+  
+  fill(255,255, 1);
+  textSize(32);
+  textAlign(CENTER, TOP);
+  textStyle(BOLDITALIC);
+  text("ew Dirty Water!!", width / 2 - 1, 25);
+   
+  //sand and water
+   fill(0,154,153)
+   rect(0, 380, 800, 225) // swamp water
+   fill(51,102,0)
+   ellipse(0, 500, 800, 65) //algi
+   
+   fill(64, 64, 64);
+   rect(0, 500, 800, 800);
+ 
+   fill(255, 204, 0);
+   rect(15, 535, 105, 40);
+   rect(145, 535, 130, 40);
+   rect(300, 535, 150, 40);
+   rect(480, 535, 175, 40);
+   rect(680, 535, 190, 40);
+ 
+   //sun
+   fill(255,255, 153);
+   circle(65, 65, 100);
+ 
+   //car
+   fill(245, 29, 29);
+   rect(450, 405, 165, 108);
+ 
+   fill(90, 231, 253);
+   rect(470, 415, 55, 55);
+   rect(545, 415, 55, 55);
+ 
+   fill(128, 128, 128);
+   circle(480, 505, 55);
+   circle(585, 505, 55);
+
+  //hide buttons
+}
+
+function charactersScreen() {
+  background(102, 0, 51);
+  
+  // Title: "Choose Your Character" 
+ fill(255, 0, 255);
+ textSize(32);
+ textAlign(CENTER, TOP);
+ textStyle(BOLDITALIC);
+ text("Choose Your Character", width / 2 - 200, 20);  
+
+ // "Your Closet" Title (Smaller, top right)
+ fill(255, 0, 127);
+ textSize(18);  
+ textStyle(BOLD);
+ textAlign(RIGHT, TOP);
+ text("Your Closet", width - 275, 20);  
+
+ // "BUY!!" Title
+ fill(153, 0, 153)
+ textSize(20);
+ textAlign(CENTER, BOTTOM);
+ text("BUY!!", width / 2.5, 280);  
+ 
+  //you, car color
+  fill (255,0,0)
+  strokeWeight(1.5)
+  circle(180, 150, 175)
+ 
+  //create difference in the piece so its not all flat
+  strokeWeight(0)
+  fill(204, 0, 102)
+  rect(0, 280, 800, 300)
+ 
+ // Closet rectangle
+ strokeWeight(1.5);
+ fill(142, 52, 6);
+ rect(430, 55, 100, 190);
+ 
+ // Wardrobe Colors (Circles)
+ fill(0, 0, 255);
+ circle(480, 200, 75);  // Blue
+ fill(0, 255, 0);
+ circle(480, 100, 75);  // Green
+
+ // Color Options Below (Circles)
+ fill(255, 128, 0);
+ circle(100, 315, 25);  // Orange
+ fill(102, 204, 0);
+ circle(100, 360, 25);  // Light Green
+ fill(0, 204, 204);
+ circle(100, 405, 25);  // Cyan
+ 
+ fill(255, 153, 51);
+ circle(200, 315, 25);  // Orange-ish
+ fill(128, 255, 0);
+ circle(200, 360, 25);  // Light Green
+ fill(0, 255, 255);
+ circle(200, 405, 25);  // Aqua
+ 
+ fill(255, 178, 102);
+ circle(300, 315, 25);  // Peach
+ fill(153, 255, 51);
+ circle(300, 360, 25);  // Light Yellow-Green
+ fill(255, 204, 153);
+ circle(400, 405, 25);  // Light Peach
+ 
+ fill(178, 255, 102);
+ circle(400, 315, 25);  // Pale Green
+ fill(102, 255, 255);
+ circle(400, 405, 25);  // Light Cyan
+ 
+ fill(51, 255, 255);
+ circle(300, 405, 25);  // Light Blue
+ fill(153, 255, 255);
+ circle(200, 405, 25);  // Soft Cyan
+ 
+ // Extra orange, green circles
+ fill(255, 299, 204);
+ circle(400, 315, 25);  // Extra Orange
+ 
+ fill(204, 255, 153);
+ circle(400, 360, 25);  // Extra Light Green
+ 
+ // Extra code line on part 500
+ fill(204, 255, 153);
+ circle(500, 315, 25);  // Extra Green
+ fill(204, 255, 153);
+ circle(500, 360, 25);  // Extra Green
+ fill(255, 255, 155);
+ circle(500, 405, 25);  // Extra Yellow
+}
+
+function settingsScreen() {
+  background(255,105,180); //i tried adding image but i need to claim it first. 
+  //hierarchy 
+  fill(255, 204, 229)
+  strokeWeight(1.5)
+  rect(385, 280, 130, 35, 20)
+  
+     fill(255, 204, 229)
+  strokeWeight(1.5)
+  rect(390, 145, 130, 35, 20)
+  
+   fill(139,69,19);
+   textSize(32);
+   textAlign(CENTER, CENTER);
+   text("Music ON/OFF", width / 2, height / 2);
+  
+   //theme feature
+fill(139,69,19);
+   textSize(32);
+   textAlign(TOP, TOP);
+   text("Theme ON/OFF", width / 2, height / 4);
+}
+
+function helpScreen() {
+  background(9, 84, 84);
+  
+  fill('deeppink');
+  textSize(16);
+  textAlign(CENTER, TOP);
+  textStyle(BOLDITALIC);
+
+  // Define the text content for each section
+  let textContent = "I love life simulation games, they are like a escape where you have control of your paths and where you go and HOW you experience the game. I had my midterm and polished up the concept with better color schemes and added a second part";
+  let textContent1 = "I kept attempting to copy the scenes i wanted to add before in proper hierarchy but it became tiring as some codes stopped working. I decided the best bet was to make a second part and flashbacks to the scenes i wanted to add. A lot of adding and over coming.";
+  let textContent2 = "The idea is to travel through an unknown nation that leads you to various places that have challenges. Inspiration from Bandersnatch and choose your own adventures Each scene in theory will be art and puzzles to the next scene. Emphasizing the minimal choice yet personalization aspect";
+
+  // Using textWrap to ensure the text fits within the canvas width
+  textWrap(WORD);
+
+  // Set the margins
+  let margin = 45;
+  let margin1 = 155;
+  let margin2 = 285;
+
+  let textWidthConstraint = width - 2 * margin;
+  let textHeightConstraint = height - 2 * margin;
+
+  // Display the section titles and their respective content
+  // "Why?" section
+  text("Why?", width / 2, margin);
+  text(textContent, margin, margin + 30, textWidthConstraint, textHeightConstraint / 3);
+
+  // "How?" section
+  text("How?", width / 2, margin1);
+  text(textContent1, margin, margin1 + 30, textWidthConstraint, textHeightConstraint / 3);
+
+  // "Goal?" section
+  text("Goal?", width / 2, margin2);
+  text(textContent2, margin, margin2 + 30, textWidthConstraint, textHeightConstraint / 3);
+ }
+
+function exitScreen() {
+    background(0);
+    fill(255, 0, 0);
+    textSize(80);
+    textAlign(CENTER, CENTER);
+    text("THE END", width / 2, height / 2);
+}
+
+// Mouse drag to control the background fade transition
+function mouseDragged() {
+    if (increasing) {
+        lerpAmount += 0.02;
+        if (lerpAmount >= 1) {
+            lerpAmount = 1;
+            increasing = false;
+        }
+    } else {
+        lerpAmount -= 0.02;
+        if (lerpAmount <= 0) {
+            lerpAmount = 0;
+            increasing = true;
+        }
+    }
+}
+
+function mousePressed() {
+    if (state === "menu") {
+        if (mouseX > 25 && mouseX < 575 && mouseY > 325 && mouseY < 375) {
+            state = "game";
+        } else if (mouseX > 25 && mouseX < 275 && mouseY > 400 && mouseY < 450) {
+            state = "characters";
+        } else if (mouseX > 320 && mouseX < 570 && mouseY > 400 && mouseY < 450) {
+            state = "settings";
+        } else if (mouseX > 25 && mouseX < 275 && mouseY > 480 && mouseY < 530) {
+            state = "help";
+        } else if (mouseX > 320 && mouseX < 570 && mouseY > 480 && mouseY < 530) {
+            state = "exit";
+        }
+    }
+}
